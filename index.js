@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 /*
  *	Configuracion de las rutas
  */ 
+const facebook_login = require('./routes/facebook_login');
+app.get('/facebook_login', facebook_login.get);
+app.get('/condiciones', facebook_login.condiciones);
+
 const academias = require('./routes/academias');
 app.get('/academias', academias.get);
 
