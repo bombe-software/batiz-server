@@ -1,5 +1,5 @@
 exports.get = function (req, res) {
-    response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     const data = {
         "id": "1",
         "nombre": "Cañón electromagnético",
