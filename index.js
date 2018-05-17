@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const academias = require('./routes/academias');
 app.get('/academias', academias.get);
 
-const proyecto = require('./routes/proyectos');
+const proyectos = require('./routes/proyectos');
 app.get('/proyectos', proyectos.get);
 
 const proyecto_detalle = require('./routes/proyecto_detalle');
