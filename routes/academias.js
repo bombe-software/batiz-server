@@ -1,30 +1,23 @@
 exports.get = function (req, res) {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    const data = [
-        {
-            "nombre": "Física",
-            "id": "1"
-        },
-        {
-            "nombre": "Química",
-            "id": "2"
-        },
-        {
-            "nombre": "Matemáticas",
-            "id": "3"
-        },
-        {
-            "nombre": "Programación",
-            "id": "4"
-        },
-        {
-            "nombre": "Sistemas",
-            "id": "5"
-        },
-        {
-            "nombre": "Máquinas",
-            "id": "6"
-        }
-    ];
-    res.end(JSON.stringify(data))
+    var soap = require('soap');
+    var url = 'http://coatl.cecyt9.ipn.mx/wsExpobatiz/WebService.asmx?WSDL';
+    var args = {token: req.params.token};
+    soap.createClient(url, function(err, client) {
+        client.categorias(args, function(err, result) {
+            let categorias = result.categoriasResult.split('**');
+            console.log(categorias);
+            let array =[];
+            for(x=0; x < categorias.length;  x ++){
+                let element = {
+                    id: categorias[x].split('**')[0],
+                    nombre: categorias[x].split('**')[1]
+                }
+                array.push(element);
+            }
+            res.end(JSON.stringify(array))
+        });
+    });
+
+    
 };
