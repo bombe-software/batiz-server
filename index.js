@@ -50,6 +50,9 @@ app.get('/condiciones', facebook_login.condiciones);
 const academias = require('./routes/academias');
 app.get('/academias', academias.get);
 
+const proyecto_imagenes = require('./routes/proyecto_imagenes');
+app.get('/proyecto_imagenes', proyecto_imagenes.get);
+
 const proyectos = require('./routes/proyectos');
 app.get('/proyectos', proyectos.get);
 
