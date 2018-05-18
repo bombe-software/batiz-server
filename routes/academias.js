@@ -17,8 +17,8 @@ exports.get = function (req, res) {
             let array =[];
             for(x=0; x < categorias.length;  x ++){
                 let element = {
-                    id: categorias[x].split('**')[0],
-                    nombre: categorias[x].split('**')[1]
+                    id: categorias[x].split('/')[1],
+                    nombre: categorias[x].split('/')[0]
                 }
                 array.push(element);
             }
