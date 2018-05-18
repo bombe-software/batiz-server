@@ -15,7 +15,7 @@ exports.get = function (req, res) {
             let categorias = result.categoriasResult.split('**');
             console.log(categorias);
             let array =[];
-            for(x=0; x < categorias.length;  x ++){
+            for(x=1; x < categorias.length-1;  x ++){
                 let element = {
                     id: categorias[x].split('/')[1],
                     nombre: categorias[x].split('/')[0]
