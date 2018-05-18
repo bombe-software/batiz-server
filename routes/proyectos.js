@@ -3,7 +3,12 @@ var url = 'http://coatl.cecyt9.ipn.mx/wsExpobatiz/WebService.asmx?WSDL';
 
 exports.get = function (req, res) {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    var args = {token: req.params.token, id: req.params.id};
+    var lol = require('url');
+    var params = lol.parse(req.url, true).query;
+    const args = {
+        token: params.token,
+        id: params.id
+    }
     soap.createClient(url, function(err, client) {
         client.proyectos(args, function(err, result) {
             let proyectos = result.proyectosResult.split('/');

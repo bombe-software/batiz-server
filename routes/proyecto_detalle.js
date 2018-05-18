@@ -4,22 +4,13 @@ exports.get = function (req, res) {
     res.writeHead(200, {
         'Content-Type': 'application/json; charset=utf-8'
     });
-    var args = {token: req.params.token, id: req.params.id};
-    const data = {
-        "id": "1",
-        "nombre": "Cañón electromagnético",
-        "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "rating": 3.9,
-        "integrantes": [{
-                "id": "1",
-                "nombre": "Juan"
-            },
-            {
-                "id": "2",
-                "nombre": "Chancho"
-            }
-        ]
-    };
+    var lol = require('url');
+    var params = lol.parse(req.url, true).query;
+    const args = {
+        token: params.token,
+        id: params.id
+    }
+
     soap.createClient(url, function (err, client) {
         client.proyecto_detalle(args, function (err, result) {
             let proyectos = result.proyecto_detalleResult.split('##');
