@@ -12,21 +12,26 @@ exports.get = function (req, res) {
         }
         soap.createClient(url, function (err, client) {
             client.proyectos(args, function (err, result) {
-                if (result.length == 0 || !result) {
-                    res.end(JSON.stringify([]))
-                } else {
-                    let proyectos = result.proyectosResult.split('/');
-                    let array = [];
-                    for (x = 0; x < proyectos.length; x++) {
-                        let element = {
-                            id: proyectos[x].split('**')[0],
-                            nombre: proyectos[x].split('**')[1],
-                            descripcion: proyectos[x].split('**')[2]
+                if(!result.proyectosResult){
+                    if (result.proyectosResult.length == 0) {
+                        res.end(JSON.stringify([]))
+                    } else {
+                        let proyectos = result.proyectosResult.split('/');
+                        let array = [];
+                        for (x = 0; x < proyectos.length; x++) {
+                            let element = {
+                                id: proyectos[x].split('**')[0],
+                                nombre: proyectos[x].split('**')[1],
+                                descripcion: proyectos[x].split('**')[2]
+                            }
+                            array.push(element);
                         }
-                        array.push(element);
-                    }
-                    res.end(JSON.stringify(array))
+                        res.end(JSON.stringify(array))
+                    }   
+                }else{
+                    res.end(JSON.stringify([]))
                 }
+
             });
         });
     } catch (e) {

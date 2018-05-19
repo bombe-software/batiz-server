@@ -14,8 +14,8 @@ exports.get = function (req, res) {
 
         soap.createClient(url, function (err, client) {
             client.proyecto_detalle(args, function (err, result) {
-                if (result.length == 0 || !result) {
-                    res.end(JSON.stringify([]))
+                if (!result.proyecto_detalleResult) {
+                    res.end(JSON.stringify({}))
                 } else {
                     let proyectos = result.proyecto_detalleResult.split('##');
                     let element = {
