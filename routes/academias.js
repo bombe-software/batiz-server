@@ -11,24 +11,20 @@ exports.get = function (req, res) {
         }
         soap.createClient(url, function (err, client) {
             client.categorias(args, function (err, result) {
-                if(!result.categoriasResult){
-                    if (result.length == 0) {
-                        res.end(JSON.stringify([]))
-                    } else {
-                        let categorias = result.categoriasResult.split('**');
-                        console.log(categorias);
-                        let array = [];
-                        for (x = 1; x < categorias.length - 2; x++) {
-                            let element = {
-                                id: categorias[x + 1].split('/')[1],
-                                nombre: categorias[x].split('/')[0]
-                            }
-                            array.push(element);
-                        }
-                        res.end(JSON.stringify(array)) 
-                    }
-                }else{
+                if (!result.categoriasResult) {
                     res.end(JSON.stringify([]))
+                } else {
+                    let categorias = result.categoriasResult.split('**');
+                    console.log(categorias);
+                    let array = [];
+                    for (x = 1; x < categorias.length - 2; x++) {
+                        let element = {
+                            id: categorias[x + 1].split('/')[1],
+                            nombre: categorias[x].split('/')[0]
+                        }
+                        array.push(element);
+                    }
+                    res.end(JSON.stringify(array))
                 }
 
             });
