@@ -15,6 +15,8 @@ exports.get = function (req, res) {
         soap.createClient(url, function (err, client) {
             client.proyecto_detalle(args, function (err, result) {
                 if (result.length == 0 || !result) {
+                    res.end(JSON.stringify([]))
+                } else {
                     let proyectos = result.proyecto_detalleResult.split('##');
                     let element = {
                         id: proyectos[0].split("**")[0],
@@ -26,8 +28,6 @@ exports.get = function (req, res) {
                         element.integrantes.push({ id: proyectos[x].split('**')[0], nombre: proyectos[x].split('**')[1] })
                     }
                     res.end(JSON.stringify(element))
-                } else {
-                    res.end(JSON.stringify({}))
                 }
             });
         });

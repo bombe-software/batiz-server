@@ -13,6 +13,8 @@ exports.get = function (req, res) {
         soap.createClient(url, function (err, client) {
             client.proyectos(args, function (err, result) {
                 if (result.length == 0 || !result) {
+                    res.end(JSON.stringify([]))
+                } else {
                     let proyectos = result.proyectosResult.split('/');
                     let array = [];
                     for (x = 0; x < proyectos.length; x++) {
@@ -24,8 +26,6 @@ exports.get = function (req, res) {
                         array.push(element);
                     }
                     res.end(JSON.stringify(array))
-                } else {
-                    res.end(JSON.stringify([]))
                 }
             });
         });
